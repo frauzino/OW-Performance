@@ -1,0 +1,46 @@
+GET http://localhost:3001/matches?season=9
+
+###
+
+DELETE http://localhost:3001/match/delete/65b2beaad60fd6310b179a4d
+
+###
+
+GET http://localhost:3001/matches?hero=Brigitte
+
+###
+
+GET http://localhost:3001/matches?&&gameMode=control
+
+###
+
+GET https://overfast-api.tekrop.fr/maps?gamemode=push
+
+###
+
+POST http://localhost:3001/users/create
+Content-Type: application/json
+
+{
+  "email": "test@test.com",
+  "password": "secret"
+}
+
+###
+
+GET http://localhost:3001/users/65d8f703dfd663b5bdd0e46d
+
+###
+
+POST http://localhost:3001/match/new
+Content-Type: application/json
+
+{
+  "season": 9,
+  "hero": "Doomfist",
+  "role": "tank",
+  "map": "Ilios",
+  "gameMode": "control",
+  "outcome": "Win",
+  "user": "65d8f703dfd663b5bdd0e46d"
+}

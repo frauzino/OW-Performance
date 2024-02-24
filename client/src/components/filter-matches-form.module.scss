@@ -1,0 +1,22 @@
+.filter-matches-wrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.header {
+  color: var(--font-light);
+  margin-bottom: .5rem;
+  text-align: left;
+}
+
+.match-filter-form {
+  display: flex;
+  width: 100%;
+  gap: 1rem;
+}
+
+.submit-btn {
+  font-weight: 500;
+}
