@@ -43,7 +43,7 @@ export function Login() {
 
   return (
     <div className={styles['login-container']}>
-      <div className={styles['login-form-wrapper']}>
+      <div className={classnames('gloss-card', styles['login-form-wrapper'])}>
         <h2 className={styles['header']}>Log In</h2>
         <Form className={styles['login-form']}>
           <FloatingLabel controlId='floatingControl' label='email'>

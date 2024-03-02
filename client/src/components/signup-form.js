@@ -29,7 +29,7 @@ export function Signup() {
 
   return (
     <div className={styles['signup-container']}>
-      <div className={styles['signup-form-wrapper']}>
+      <div className={classnames('gloss-card', styles['signup-form-wrapper'])}>
         <h2 className={styles['header']}>Sign up</h2>
         <Form className={styles['signup-form']}>
           <FloatingLabel controlId='floatingControl' label='email'>

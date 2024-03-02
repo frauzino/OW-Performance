@@ -38,7 +38,7 @@ export function BarGraph(props) {
     datasets: [
       {
         data: subjects().map(subjectCount),
-        backgroundColor: (subject === 'outcome') ? ['rgba(161, 235, 161, .5)', 'rgba(242, 160, 172, .5)', 'rgba(211, 211, 211, .5)'] :Please.make_color({
+        backgroundColor: (subject === 'outcome') ? ['rgba(161, 235, 161, .8)', 'rgba(242, 160, 172, .8)', 'rgba(211, 211, 211, .8)'] :Please.make_color({
           colors_returned: subjects().map(subjectCount).length,
           value: .8
         })

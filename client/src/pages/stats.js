@@ -158,7 +158,7 @@ export function Stats() {
         setShowMatches={setShowMatches}
       />
 
-      <div className={classnames(styles['card'], styles['stats-card'])}>
+      <div className={classnames('gloss-card', 'chart-card')}>
         <h4 className={styles['card-header']}>
           {matches.length} Matches. Win Rate: {((countMatches(matches, (match) => match.outcome === 'Win') / matches.length) * 100).toFixed(1)}%
         </h4>
@@ -175,7 +175,7 @@ export function Stats() {
         </div>
       </div>
 
-      <div className={classnames(styles['card'], styles['stats-card'])}>
+      <div className={classnames('gloss-card', 'chart-card')}>
         <div className={styles['header-wrapper']}>
           <h4 className={styles['card-header']}>
             Performance Trend
@@ -201,7 +201,7 @@ export function Stats() {
         </div>
       </div>
 
-      <div className={classnames(styles['card'], styles['stats-card'])}>
+      <div className={classnames('gloss-card', 'chart-card')}>
         <h4 className={styles['card-header']}>
         Hero Picks
         </h4>
@@ -213,7 +213,7 @@ export function Stats() {
         </div>
       </div>
 
-      <div className={classnames(styles['card'], styles['stats-card'])}>
+      <div className={classnames('gloss-card', 'chart-card')}>
         <h4 className={styles['card-header']}>
           Total Match Outcomes
         </h4>
@@ -226,7 +226,7 @@ export function Stats() {
         </div>
       </div>
 
-      <div className={classnames(styles['card'], styles['stats-card'])}>
+      <div className={classnames('gloss-card', 'chart-card')}>
         <h4 className={styles['card-header']}>
           Maps Played
         </h4>
@@ -239,7 +239,7 @@ export function Stats() {
         </div>
       </div>
 
-      <div className={classnames(styles['card'], styles['stats-card'])}>
+      <div className={classnames('gloss-card', 'chart-card')}>
         <h4 className={styles['card-header']}>
           Gamemodes Played
         </h4>
