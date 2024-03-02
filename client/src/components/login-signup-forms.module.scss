@@ -68,3 +68,9 @@
     color: var(--link-grey)
   }
 }
+
+@media screen and (max-width: 749px) {
+  .login-container, .signup-container {
+    height: 80vh
+  }
+}

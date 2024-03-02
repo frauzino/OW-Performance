@@ -78,3 +78,13 @@ code {
   max-width: calc(50% - 1rem);
   flex: 1 0 40%;
 }
+
+@media screen and (max-width: 749px) {
+  .gloss-card {
+    padding: 1rem;
+  }
+
+  .chart-card {
+    max-width: 100%;
+  }
+}

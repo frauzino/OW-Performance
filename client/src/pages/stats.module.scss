@@ -4,6 +4,7 @@
   padding: 2rem 0rem;
   display: flex;
   flex-wrap: wrap;
+  justify-content: space-between;
   gap: 2rem;
 }
 
@@ -19,7 +20,6 @@
   backdrop-filter: blur(7px);
   -webkit-backdrop-filter: blur(7px);
   max-width: calc(50% - 1rem);
-  flex: 1 0 40%;
 }
 
 .header-wrapper {
@@ -77,4 +77,10 @@
   text-align: center;
   position: relative;
   padding: 2px;
+}
+
+@media screen and (max-width: 749px) {
+  .stats-page-container {
+    flex-direction: column;
+  }
 }

@@ -3,3 +3,9 @@
   margin-top: 4rem;
   padding: 5rem;
 }
+
+@media screen and (max-width: 749px) {
+  .master-container {
+    padding: 1rem
+  }
+}
