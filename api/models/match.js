@@ -30,9 +30,13 @@ const MatchSchema = new Schema({
     type: String,
     default: Date.now()
   },
+  // user: {
+  //   type: Schema.Types.ObjectId,
+  //   ref: "User"
+  // }
   user: {
-    type: Schema.Types.ObjectId,
-    ref: "User"
+    type: String,
+    require: true
   }
 })
 

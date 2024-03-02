@@ -30,14 +30,14 @@ app.get('/matches', async (req, res) => {
 
   // create new match
 app.post('/match/new', async (req, res) => {
-  const userId = req.body.user
+  // const userId = req.body.user
   const newMatch = new Match(req.body);
   const savedMatch = await newMatch.save();
-  await User.findByIdAndUpdate(userId, {
-    $push: {matches: savedMatch._id}
-  })
+  // await User.findByIdAndUpdate(userId, {
+  //   $push: {matches: savedMatch._id}
+  // })
   res.json(savedMatch);
-})
+});
 
 
 // delete match

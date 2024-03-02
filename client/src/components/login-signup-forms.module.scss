@@ -1,0 +1,76 @@
+.login-container, .signup-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.login-form-wrapper, .signup-form-wrapper {
+  background-color: var(--dark-blue);
+  border-radius: var(--box-border-radius);
+  box-shadow: var(--card-shadow);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  width: fit-content;
+}
+
+.header {
+  color: var(--font-light);
+  margin-bottom: 1rem;
+}
+
+.separator {
+  margin: 0;
+}
+
+.login-form, .signup-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+
+.input {
+  background: var(--light)
+}
+
+#alt-login-button {
+  background-color: var(--light);
+  width: 100%;
+  height: 3.5rem;
+  border: var(--bs-border-width) solid var(--bs-border-color);
+  transition: .2s;
+
+  &:hover {
+    border-color: #8bd1fb;
+    box-shadow: 0 0 0 0.25rem rgba(22, 162, 247, 0.25);
+  }
+}
+
+.icon-and-text {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.icon {
+  width: 3rem;
+}
+
+.submit-btn {
+  width: 100%;
+}
+
+.redirect-link {
+  margin-top: 1rem;
+  color: var(--light-grey);
+  transition: .2s;
+
+  &:hover {
+    color: var(--link-grey)
+  }
+}

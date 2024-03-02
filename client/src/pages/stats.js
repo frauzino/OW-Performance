@@ -1,15 +1,14 @@
 import styles from './stats.module.scss'
 import classnames from 'classnames'
 import { useState, useEffect, useRef, useTransition } from 'react'
-import FloatingLabel from 'react-bootstrap/FloatingLabel';
-import Form from 'react-bootstrap/Form';
-import Button from 'react-bootstrap/Button';
 import { LineGraph } from '../components/line-graph';
 import { PieChart } from '../components/pie-chart';
 import { BarGraph } from '../components/bar-graph';
 import CloseButton from 'react-bootstrap/CloseButton';
 import { AddMatchForm } from '../components/add-match-form'
 import { FilterMatchesForm } from '../components/filter-matches-form'
+import FloatingLabel from 'react-bootstrap/FloatingLabel';
+import Form from 'react-bootstrap/Form';
 
 const API_BASE = "http://localhost:3001"
 const API_OVERFAST = "https://overfast-api.tekrop.fr"
@@ -25,10 +24,11 @@ export function Stats() {
   const [gameModes, setGameModes] = useState([])
   const [maps, setMaps] = useState([])
   const [seasons, setSeasons] = useState([8, 9])
-  const [user, setUser] = useState()
+  const [showMatches, setShowMatches] = useState(10)
+  const user = JSON.parse(localStorage.getItem('user'))
+  const userMatchesApi = `${API_BASE}/matches?user=${user.uid}`
 
   useEffect(() => {
-    GetUser();
     GetSeasonMatches();
     getHeroes();
     getRoles();
@@ -43,23 +43,8 @@ export function Stats() {
   //   console.log(item)
   // }
 
-  const GetUser = () => {
-    fetch(API_BASE + '/users/65d8f703dfd663b5bdd0e46d')
-    .then(res => res.json())
-    .then(data => setUser(data))
-    .catch(err => console.error('error', err))
-  }
-
-  const GetMatches = (event) => {
-    fetch(API_BASE + '/matches')
-    .then(res => res.json())
-    .then(data => setMatches(data))
-    .catch(err => console.error('error', err));
-    if (event) {event.preventDefault();}
-  }
-
   const GetSeasonMatches = (event) => {
-    fetch(API_BASE + `/matches?season=${season}`)
+    fetch(`${userMatchesApi}&season=${season}`)
     .then(res => res.json())
     .then(data => setMatches(data))
     .catch(err => console.error('error', err));
@@ -84,7 +69,7 @@ export function Stats() {
         map: newMatch.map,
         gameMode: newMatch.gameMode,
         outcome: newMatch.outcome,
-        user: user
+        user: user.uid
       })
     })
     .then(res => res.json())
@@ -100,7 +85,7 @@ export function Stats() {
     setMatches(matches => matches.filter(match => match._id !== data._id))
   }
 
-  const getHeroes = () => {
+  const getHeroes = (event, role) => {
     fetch(API_OVERFAST + '/heroes')
     .then(res => res.json())
     .then(data => setHeroes(data))
@@ -150,7 +135,6 @@ export function Stats() {
 
   return (
     <div className={styles['stats-page-container']}>
-
       <AddMatchForm
         header='Add New Match'
         addMatch={addMatch}
@@ -166,10 +150,12 @@ export function Stats() {
         heroes={heroes}
         gameModes={gameModes}
         maps={maps}
+        userMatchesApi={userMatchesApi}
         getMaps={getMaps}
-        GetMatches={GetMatches}
         GetSeasonMatches={GetSeasonMatches}
         setMatches={setMatches}
+        showMatches={showMatches}
+        setShowMatches={setShowMatches}
       />
 
       <div className={classnames(styles['card'], styles['stats-card'])}>
@@ -177,6 +163,7 @@ export function Stats() {
           {matches.length} Matches. Win Rate: {((countMatches(matches, (match) => match.outcome === 'Win') / matches.length) * 100).toFixed(1)}%
         </h4>
         <div className={styles['stats']}>
+          <div className={styles['fader']} />
           {matches?.toReversed().map((match) => (
             <div className={classnames(styles['match-row'], styles[matchColor(match.outcome)])} key={match._id}>
               <div className={styles['match-item']}>{match.hero}</div>
@@ -189,13 +176,27 @@ export function Stats() {
       </div>
 
       <div className={classnames(styles['card'], styles['stats-card'])}>
-        <h4 className={styles['card-header']}>
-          Performance Over Time
-        </h4>
-        <div className={styles['chart-container']}>
+        <div className={styles['header-wrapper']}>
+          <h4 className={styles['card-header']}>
+            Performance Trend
+          </h4>
+          <Form.Select
+            className={styles['filter-select']}
+            aria-label="Season"
+            onChange={e => setShowMatches(e.target.value)}
+            value={showMatches}
+          >
+            <option value={matches.length}>All</option>
+            <option value={100}>100</option>
+            <option value={50}>50</option>
+            <option value={25}>25</option>
+            <option value={10}>10</option>
+          </Form.Select>
+        </div>
+        <div>
           <LineGraph
-            matches={matches}
-            legend={`Performance over ${matches.length} matches`}
+            matches={matches.slice(0).slice(-showMatches)}
+            legend={`Performance over last ${Math.min(matches.length, showMatches)} matches`}
           />
         </div>
       </div>
@@ -220,7 +221,7 @@ export function Stats() {
           <BarGraph
             matches={matches}
             orientation={'x'}
-            legend={`Results of ${matches.length} matches`}
+            subject={'outcome'}
           />
         </div>
       </div>
@@ -230,12 +231,26 @@ export function Stats() {
           Maps Played
         </h4>
         <div className={styles['chart-container']}>
-          <PieChart
+          <BarGraph
             matches={matches}
+            orientation={'y'}
             subject={'map'}
           />
         </div>
       </div>
+
+      <div className={classnames(styles['card'], styles['stats-card'])}>
+        <h4 className={styles['card-header']}>
+          Gamemodes Played
+        </h4>
+        <div className={styles['chart-container']}>
+          <PieChart
+            matches={matches}
+            subject={'gameMode'}
+          />
+        </div>
+      </div>
+
     </div>
   )
 }

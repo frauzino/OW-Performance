@@ -23,14 +23,16 @@ code {
   --bg-dark: #282c34;
   --dark-blue: #49566e;
   --font-dark: rgb(79, 79, 93);
-  --font-light: #FFF;
+  --font-light: #ffffff;
   --font-alt: #949494;
   --alert-red: rgb(158, 40, 40);
   --alert-red-hover: rgb(118, 26, 26);
-  --overwatch-orange: #de5f1a;
+  --overwatch-orange: #ea6c29;
   --overwatch-orange-dark: #b7490e;
-  --overwatch-blue: #16a2f7;
+  --overwatch-blue: #3cb3fd;
   --light-grey: rgb(177, 177, 177);
+  --link-grey: rgb(212, 212, 212);
+  --dark-purple: rgba(17, 0, 32, .5);
 
   --shadow: 2px 2px 10px 3px rgba(50, 50, 50, 0.8);
   --card-shadow: rgba(17, 17, 26, 0.1) 0px 1px 0px, rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 48px;

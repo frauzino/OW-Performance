@@ -1,15 +1,15 @@
 import styles from './App.module.scss'
 import { Navbar } from './components/navbar'
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import { Home } from './pages/home'
+import { BrowserRouter, Routes, Route, Outlet } from 'react-router-dom'
 import { Stats } from './pages/stats'
 import { Login } from './components/login-form'
+import { Signup } from './components/signup-form'
+import { ProtectedRoute } from './non-visual-components/protected-route'
 
 export default function App() {
 
   return (
     <div className={styles['App']}>
-      <BrowserRouter>
         <Navbar
           navItems={[
             // {
@@ -19,23 +19,8 @@ export default function App() {
           ]}
         />
         <div className={styles['master-container']}>
-          <Routes>
-            <Route
-              index
-              // element={<Home />}
-              element={<Stats />}
-            />
-            <Route
-              path="/login"
-              element={<Login />}
-            />
-            {/* <Route
-              path="/stats"
-              element={<Stats />}
-            /> */}
-          </Routes>
+          <Outlet />
         </div>
-      </BrowserRouter>
     </div>
   );
 }

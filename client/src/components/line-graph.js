@@ -41,23 +41,50 @@ export function LineGraph(props) {
     return winsArray
   }
 
+  const data = {
+    labels: matches.map((match) => match.hero),
+    datasets: [
+      {
+        label: legend,
+        data: winsCount(),
+        fill: false,
+        boderWidth: 3,
+        backgroundColor: 'white',
+        borderColor: '#ea6c29',
+      }
+    ]
+  }
+
+  const options = {
+    responsive: true,
+    color: 'white',
+    aspectRatio: 1.5,
+    plugins: {
+      legend: {
+        labels: {
+          boxWidth: 12
+        }
+      }
+    },
+    scales: {
+      x: {
+        ticks: {
+          color: 'white'
+        }
+      },
+      y: {
+        ticks: {
+          color: 'white'
+        }
+      }
+    }
+  }
+
   return (
       <Line
         className={styles['line-graph']}
-        data={{
-          labels: matches.map((match) => match.hero),
-          datasets: [
-            {
-              label: legend,
-              data: winsCount(),
-              fill: false,
-              boderWidth: 3,
-              backgroundColor: 'white',
-              borderColor: 'orange',
-              responsive: true
-            }
-          ]
-        }}
+        data={data}
+        options={options}
       />
   )
 }

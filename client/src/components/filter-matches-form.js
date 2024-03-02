@@ -5,8 +5,6 @@ import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 
-const API_BASE = "http://localhost:3001"
-
 export function FilterMatchesForm(props) {
   const header = props.header
   const season = props.season
@@ -16,10 +14,13 @@ export function FilterMatchesForm(props) {
   const gameModes = props.gameModes
   const maps = props.maps
   const getMaps = props.getMaps
-  const GetMatches = props.GetMatches
   const GetSeasonMatches = props.GetSeasonMatches
   const setMatches = props.setMatches
+  const userMatchesApi = props.userMatchesApi
+  const showMatches = props.showMatches
+  const setShowMatches = props.setShowMatches
 
+  const [filteredHeroes, setFilteredHeroes] = useState(heroes)
   const [filterHero, setFilterHero] = useState('All')
   const [filterMap, setFilterMap] = useState('All')
   const [filterMode, setFilterMode] = useState('All')
@@ -27,10 +28,13 @@ export function FilterMatchesForm(props) {
   const [filterSeason, setFilterSeason] = useState(season)
 
   const filterMatches = (event) => {
-    const url = `${API_BASE}/matches?${filterHero != 'All' ? 'hero=' + filterHero : ''}&${filterRole!= 'All' ? 'role=' + filterRole : ''}&${filterMap != 'All' ? 'map=' + filterMap : ''}&${filterMode != 'All' ? 'gameMode=' + filterMode : ''}&${filterSeason != 'All' ? 'season=' + filterSeason : ''}`
+    const url = `${userMatchesApi}&${filterHero != 'All' ? 'hero=' + filterHero : ''}&${filterRole != 'All' ? 'role=' + filterRole : ''}&${filterMap != 'All' ? 'map=' + filterMap : ''}&${filterMode != 'All' ? 'gameMode=' + filterMode : ''}&${filterSeason != 'All' ? 'season=' + filterSeason : ''}`
     fetch(url)
     .then(res => res.json())
-    .then(data => setMatches(data))
+    .then(data => {
+      data.length != showMatches && setShowMatches(data.length)
+      setMatches(data)
+    })
     .catch(err => console.error('error', err));
     event.preventDefault();
   }
@@ -65,7 +69,7 @@ export function FilterMatchesForm(props) {
             <Form.Select
               className={styles['filter-select']}
               aria-label="Role"
-              onChange={e => setFilterRole(e.target.value)}
+              onChange={e => [setFilterRole(e.target.value), setFilteredHeroes(e.target.value === 'All' ? heroes : heroes.filter((hero) => hero.role === e.target.value))]}
               value={filterRole}
             >
               <option value="All">All</option>
@@ -83,7 +87,7 @@ export function FilterMatchesForm(props) {
               value={filterHero}
             >
               <option value="All">All</option>
-              {heroes?.map((hero, index) => (
+              {(filterRole === 'All' ? heroes : filteredHeroes)?.map((hero, index) => (
                 <option key={`hero-${index}`} value={hero.name}>{hero.name}</option>
               ))}
             </Form.Select>
@@ -117,8 +121,8 @@ export function FilterMatchesForm(props) {
 
             </Form.Select>
           </FloatingLabel>
-          <Button type='submit' className={styles['submit-btn']} onClick={e => (filterHero === "All" && filterSeason === 'All' && filterRole === 'All' && filterMap === 'All' && filterMode === 'All') ? GetMatches(e) : filterMatches(e)}>Go</Button>
-          <Button type='submit' className={classnames(styles['submit-btn'], 'btn-secondary')} onClick={e => ([GetSeasonMatches(e), resetFilters()])}>Reset</Button>
+          <Button type='submit' className={styles['submit-btn']} onClick={e => filterMatches(e)}>Go</Button>
+          <Button type='submit' className={classnames(styles['submit-btn'], 'btn-secondary')} onClick={e => ([GetSeasonMatches(e), resetFilters(), setShowMatches(10)])}>Reset</Button>
         </Form>
     </div>
   )

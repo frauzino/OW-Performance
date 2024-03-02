@@ -1,9 +1,22 @@
 import styles from './navbar.module.scss'
-import { Link } from 'react-router-dom'
+// import { useAuthState } from 'react-firebase-hooks/auth'
+import { auth } from '../utils/firebase'
 import { NavLink } from 'react-router-dom'
+import { Link } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
 export function Navbar(props) {
   const navItems = props.navItems
+  // const [user, loading] = useAuthState(auth)
+  const token = localStorage.getItem('token')
+  const navigate = useNavigate()
+
+  const handleSignOut = async () => {
+    await auth.signOut()
+    localStorage.removeItem('token')
+    localStorage.removeItem('user')
+    navigate('/login')
+  }
 
   return (
     <div className={styles['navbar']}>
@@ -25,6 +38,13 @@ export function Navbar(props) {
             </NavLink>
           </li>
         ))}
+        {token && (
+          <li className={styles['nav-item']} onClick={handleSignOut}>
+            <NavLink>
+              Logout
+            </NavLink>
+          </li>
+        )}
       </ul>
     </div>
   )

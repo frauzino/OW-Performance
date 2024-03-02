@@ -9,6 +9,7 @@ import {
   Legend,
 } from 'chart.js';
 import { Bar } from 'react-chartjs-2';
+import Please from 'pleasejs'
 
 ChartJS.register(
   CategoryScale,
@@ -21,45 +22,58 @@ ChartJS.register(
 
 export function BarGraph(props) {
   const matches = props.matches
-  const legend = props.legend
   const orientation = props.orientation
+  const subject = props.subject
 
-  const outcomeCount = (outcome) => (
-    matches.filter(match  => match.outcome === outcome).length
+  const subjects = () => (
+    [...new Set(matches.map((match) => match[subject]))]
   )
+
+  const subjectCount = (item) => (
+    matches.filter(match => item === (match[subject])).length
+  )
+
+  const data = {
+    labels: subjects(),
+    datasets: [
+      {
+        data: subjects().map(subjectCount),
+        backgroundColor: (subject === 'outcome') ? ['rgba(161, 235, 161, .5)', 'rgba(242, 160, 172, .5)', 'rgba(211, 211, 211, .5)'] :Please.make_color({
+          colors_returned: subjects().map(subjectCount).length,
+          value: .8
+        })
+      }
+    ]
+  }
+
+  const options = {
+    responsive: true,
+    aspectRatio: 1.5,
+    indexAxis: orientation,
+    scales: {
+      x: {
+        ticks: {
+          color: 'white'
+        }
+      },
+      y: {
+        ticks: {
+          color: 'white'
+        }
+      }
+    },
+    plugins: {
+      legend: {
+        display: false
+      }
+    }
+  }
 
   return(
       <Bar
         className={styles['bar-graph']}
-        options={{
-          indexAxis: orientation,
-        }}
-        data={{
-          labels: [legend],
-          datasets: [
-            {
-              label: 'Wins',
-              data: [outcomeCount('Win')],
-              backgroundColor: ['rgba(161, 235, 161, .7)'],
-              borderColor: ['rgba(161, 235, 161, 1)'],
-              responsive: true
-            },
-            {
-              label: 'Losses',
-              data: [outcomeCount('Loss')],
-              backgroundColor: [ 'rgba(242, 160, 172, .7)'],
-              borderColor: ['rgba(242, 160, 172, 1)'],
-              responsive: true
-            },
-            {
-              label: 'Draws',
-              data: [outcomeCount('Draw')],
-              backgroundColor: ['rgba(212, 212, 212, .7)'],
-              borderColor: ['rgba(212, 212, 212, 1)'],
-              responsive: true
-            }
-          ]
-        }}
+        options={options}
+        data={data}
       />
   )
 }

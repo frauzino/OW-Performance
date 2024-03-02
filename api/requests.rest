@@ -28,7 +28,8 @@ Content-Type: application/json
 
 ###
 
-GET http://localhost:3001/users/65d8f703dfd663b5bdd0e46d
+GET http://localhost:3001/matches?user=65d8f703dfd663b5bdd0e46d&season=9
+
 
 ###
 
@@ -44,3 +45,7 @@ Content-Type: application/json
   "outcome": "Win",
   "user": "65d8f703dfd663b5bdd0e46d"
 }
+
+###
+
+GET http://localhost:3001/matches?user=rAAtYBTKvkUayk7Du68e9vRzrHn2&season=9
