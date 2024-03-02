@@ -52,3 +52,13 @@
     cursor: pointer;
   }
 }
+
+@media screen and (max-width: 749px) {
+  .navbar, .nav-items-container {
+    padding: 0;
+  }
+
+  .title, .nav-item {
+    padding: 0 2rem;
+  }
+}
