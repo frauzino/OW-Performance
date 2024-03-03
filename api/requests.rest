@@ -49,3 +49,7 @@ Content-Type: application/json
 ###
 
 GET http://localhost:3001/matches?user=rAAtYBTKvkUayk7Du68e9vRzrHn2&season=9
+
+###
+
+GET https://overwatch.blizzard.com/en-us/season/

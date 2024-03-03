@@ -1,24 +1,13 @@
 import styles from './filter-matches-form.module.scss'
 import classnames from 'classnames'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 
-export function FilterMatchesForm(props) {
-  const header = props.header
-  const season = props.season
-  const seasons = props.seasons
-  const roles = props.roles
-  const heroes = props.heroes
-  const gameModes = props.gameModes
-  const maps = props.maps
-  const getMaps = props.getMaps
-  const GetSeasonMatches = props.GetSeasonMatches
-  const setMatches = props.setMatches
-  const userMatchesApi = props.userMatchesApi
-  const showMatches = props.showMatches
-  const setShowMatches = props.setShowMatches
+export function FilterMatchesForm({
+  header, season, seasons, roles, heroes, gameModes, maps, getMaps, getSeasonMatches, setMatches, userMatchesApi, showMatches, setShowMatches
+}) {
 
   const [filteredHeroes, setFilteredHeroes] = useState(heroes)
   const [filterHero, setFilterHero] = useState('All')
@@ -46,6 +35,10 @@ export function FilterMatchesForm(props) {
     setFilterRole('All')
     setFilterSeason(season)
   }
+
+  useEffect(()=> {
+    setFilterSeason(season)
+  }, [season])
 
   return(
     <div className={styles['filter-matches-wrapper']}>
@@ -121,8 +114,8 @@ export function FilterMatchesForm(props) {
 
             </Form.Select>
           </FloatingLabel>
-          <Button type='submit' className={styles['submit-btn']} onClick={e => filterMatches(e)}>Go</Button>
-          <Button type='submit' className={classnames(styles['submit-btn'], 'btn-secondary')} onClick={e => ([GetSeasonMatches(e), resetFilters(), setShowMatches(10)])}>Reset</Button>
+          <Button className={styles['submit-btn']} onClick={e => filterMatches(e)}>Go</Button>
+          <Button className={classnames(styles['submit-btn'], 'btn-secondary')} onClick={e => ([getSeasonMatches(e), resetFilters(), setShowMatches(10)])}>Reset</Button>
         </Form>
     </div>
   )
