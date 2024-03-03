@@ -1,3 +1,6 @@
+const jsdom = require("jsdom");
+const { JSDOM } = jsdom;
+
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
@@ -46,6 +49,21 @@ app.delete('/match/delete/:id', async (req, res) => {
 
   res.json(match);
 });
+
+// get season
+
+app.get('/getseason', async(req, res) => {
+  const result = await fetch('https://overwatch.blizzard.com/en-us/season/')
+  const html = await result.text()
+  // console.log(html)
+
+  const dom = new JSDOM(html)
+  const document = dom.window.document
+
+  const title = document.querySelector('title')?.textContent
+  const season = parseInt(title.slice(-1))
+   res.status(200).json(season)
+})
 
   // Matches
 

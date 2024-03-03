@@ -15,6 +15,10 @@
   display: flex;
   width: 100%;
   gap: 1rem;
+
+  > div {
+    min-width: 5.5rem;
+  }
 }
 
 .submit-btn {

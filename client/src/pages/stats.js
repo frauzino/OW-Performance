@@ -7,7 +7,6 @@ import { BarGraph } from '../components/bar-graph';
 import CloseButton from 'react-bootstrap/CloseButton';
 import { AddMatchForm } from '../components/add-match-form'
 import { FilterMatchesForm } from '../components/filter-matches-form'
-import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import Form from 'react-bootstrap/Form';
 
 const API_BASE = "http://localhost:3001"
@@ -15,7 +14,7 @@ const API_OVERFAST = "https://overfast-api.tekrop.fr"
 
 export function Stats() {
   const [matches, setMatches] = useState([])
-  const season = 9
+  const [season, setSeason] = useState('')
   const [newMatch, setNewMatch] = useState({season: season, hero: '', role:'', gameMode: '', map: '', outcome: ''})
   const matchesRef = useRef(matches)
   matchesRef.current = matches
@@ -23,28 +22,37 @@ export function Stats() {
   const [roles, setRoles] = useState([])
   const [gameModes, setGameModes] = useState([])
   const [maps, setMaps] = useState([])
-  const [seasons, setSeasons] = useState([8, 9])
+  const [seasons, setSeasons] = useState([])
   const [showMatches, setShowMatches] = useState(10)
   const user = JSON.parse(localStorage.getItem('user'))
   const userMatchesApi = `${API_BASE}/matches?user=${user.uid}`
 
   useEffect(() => {
-    GetSeasonMatches();
+    getSeason();
+    getSeasonMatches();
     getHeroes();
     getRoles();
     getGameModes();
     getMaps();
-    // getSeason()
-  }, [])
+    getSeasons();
+  }, [season])
 
-  // const getSeason = () => {
-  //   const item = fetch('https://www.google.com/search?q=what+is+the+current+overwatch+season&client=firefox-b-d&sca_esv=82c0f5fcf9e8a56e&sxsrf=ACQVn08PG2uNWjtfpQJjVdS5mdkpcEnr4w%3A1706902074669&ei=OkK9Zbm5KPqh5NoP9cq9-AU&oq=what+is+the+current+overwa&gs_lp=Egxnd3Mtd2l6LXNlcnAiGndoYXQgaXMgdGhlIGN1cnJlbnQgb3ZlcndhKgIIADILEAAYgAQYigUYkQIyChAAGIAEGBQYhwIyBRAAGIAEMgYQABgWGB4yCxAAGIAEGIoFGIYDSJ2SAVD8Y1iRiQFwBHgBkAEAmAGWAaAB5RCqAQQyMy4zuAEDyAEA-AEBwgIKEAAYRxjWBBiwA8ICERAuGIAEGIoFGJECGLEDGIMBwgIREAAYgAQYigUYkQIYsQMYgwHCAgoQABiABBiKBRhDwgIOEC4YgAQYsQMYxwEY0QPCAg4QLhiABBiKBRixAxiDAcICERAuGIAEGLEDGIMBGMcBGNEDwgILEAAYgAQYsQMYgwHCAiAQLhiABBiKBRiRAhixAxiDARiXBRjcBBjeBBjgBNgBAcICBBAjGCfCAgoQIxiABBiKBRgnwgIOEAAYgAQYigUYsQMYgwHCAhAQABiABBiKBRhDGLEDGIMBwgIIEAAYgAQYsQPCAgoQABiABBhGGPsBwgIFEC4YgATCAhYQABiABBhGGPsBGJcFGIwFGN0E2AEC4gMEGAAgQYgGAZAGCLoGBggBEAEYFLoGBggCEAEYEw&sclient=gws-wiz-serp#ip=1')
-  //   .then(res => res.json())
-  //   console.log(item)
-  // }
+  const getSeason = async () => {
+    await fetch(`${API_BASE}/getseason`)
+    .then(res => res.json())
+    .then(data => setSeason(data))
+  }
 
-  const GetSeasonMatches = (event) => {
-    fetch(`${userMatchesApi}&season=${season}`)
+  const getSeasons = () => {
+    const seasonsArray = []
+    for (var i = 8; i <= season; i++) {
+      seasonsArray.push(i)
+    }
+    setSeasons(seasonsArray)
+  }
+
+  const getSeasonMatches = async (event) => {
+    await fetch(`${userMatchesApi}&season=${season}`)
     .then(res => res.json())
     .then(data => setMatches(data))
     .catch(err => console.error('error', err));
@@ -152,7 +160,7 @@ export function Stats() {
         maps={maps}
         userMatchesApi={userMatchesApi}
         getMaps={getMaps}
-        GetSeasonMatches={GetSeasonMatches}
+        getSeasonMatches={getSeasonMatches}
         setMatches={setMatches}
         showMatches={showMatches}
         setShowMatches={setShowMatches}
