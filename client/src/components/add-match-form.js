@@ -9,7 +9,6 @@ const API_OVERFAST = "https://overfast-api.tekrop.fr"
 
 export function AddMatchForm(props) {
   const header = props.header
-  const togglePopup = props.togglePopup
   const addMatch = props.addMatch
   const newMatch = props.newMatch
   const setNewMatch = props.setNewMatch

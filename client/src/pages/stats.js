@@ -15,7 +15,7 @@ const API_OVERFAST = "https://overfast-api.tekrop.fr"
 export function Stats() {
   const [matches, setMatches] = useState([])
   const [season, setSeason] = useState('')
-  const [newMatch, setNewMatch] = useState({season: season, hero: '', role:'', gameMode: '', map: '', outcome: ''})
+  const [newMatch, setNewMatch] = useState({season: '', hero: '', role:'', gameMode: '', map: '', outcome: ''})
   const matchesRef = useRef(matches)
   matchesRef.current = matches
   const [heroes, setHeroes] = useState([])
@@ -35,7 +35,9 @@ export function Stats() {
     getGameModes();
     getMaps();
     getSeasons();
+    setNewMatch({season: season});
   }, [season])
+
 
   const getSeason = async () => {
     await fetch(`${API_BASE}/getseason`)
@@ -61,6 +63,7 @@ export function Stats() {
 
   const addMatch = async id => {
 
+    console.log(newMatch)
     if (Object.values(newMatch).some(value => value === "")) {
       return
     }

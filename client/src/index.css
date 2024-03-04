@@ -57,7 +57,7 @@ code {
 
 .x-icon:hover {
   cursor: pointer;
-    background-color: var(--alert-red-hover);
+    background-color: rgba(17, 0, 32, .3);
 }
 
 .gloss-card {
