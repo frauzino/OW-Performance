@@ -9,7 +9,7 @@ import { AddMatchForm } from '../components/add-match-form'
 import { FilterMatchesForm } from '../components/filter-matches-form'
 import Form from 'react-bootstrap/Form';
 
-const API_BASE = "http://localhost:3001"
+const API_BASE = process.env.REACT_APP_BASE_API_URL
 const API_OVERFAST = "https://overfast-api.tekrop.fr"
 
 export function Stats() {

@@ -19,16 +19,6 @@ const firebaseConfig = {
   measurementId: process.env.REACT_APP_FIREBASE_MEASUREMENT_ID
 };
 
-// const firebaseConfig = {
-//   apiKey: "AIzaSyCFyowKeQLZy_yS0R6rKa_xQ7dCgmF79IM",
-//   authDomain: "overwise-b381e.firebaseapp.com",
-//   projectId: "overwise-b381e",
-//   storageBucket: "overwise-b381e.appspot.com",
-//   messagingSenderId: "758732204806",
-//   appId: "1:758732204806:web:79f9838c07ec0e4ae04c87",
-//   measurementId: "G-B6RSNVPXWX"
-// };
-
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 

@@ -86,3 +86,11 @@ app.post('/users/create', UserControls.create)
 app.get('/users', UserControls.all)
 app.get('/users/:id', UserControls.find)
 app.get('/users/:id/matches', UserControls.getAllMatches)
+
+// Production Middleware - disable for development
+
+app.use(express.static(path.join(__dirname, "/client/build")));
+
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '/client/build', 'index.html'));
+});
