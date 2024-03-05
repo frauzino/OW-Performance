@@ -63,13 +63,14 @@ app.delete('/match/delete/:id', async (req, res) => {
 app.get('/getseason', async(req, res) => {
   const result = await fetch('https://overwatch.blizzard.com/en-us/season/')
   const html = await result.text()
-  // console.log(html)
 
   const dom = new JSDOM(html)
   const document = dom.window.document
 
   const title = document.querySelector('title')?.textContent
+  console.log('title', title)
   const season = parseInt(title.slice(-1))
+  console.log('season', season)
    res.status(200).json(season)
 })
 

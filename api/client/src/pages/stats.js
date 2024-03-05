@@ -27,6 +27,8 @@ export function Stats() {
   const user = JSON.parse(localStorage.getItem('user'))
   const userMatchesApi = `${API_BASE}/matches?user=${user.uid}`
 
+  console.log('Season Output:', season)
+
   useEffect(() => {
     getSeason();
     getSeasonMatches();
@@ -42,7 +44,7 @@ export function Stats() {
   const getSeason = async () => {
     await fetch(`${API_BASE}/getseason`)
     .then(res => res.json())
-    .then(data => setSeason(data))
+    .then(data => [console.log('data', data), setSeason(data)])
   }
 
   const getSeasons = () => {
