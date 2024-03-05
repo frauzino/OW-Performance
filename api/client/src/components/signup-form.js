@@ -6,8 +6,8 @@ import classnames from 'classnames'
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { auth } from '../utils/firebase'
-import { createUserWithEmailAndPassword } from 'firebase/auth';
-import FormGroup from 'react-bootstrap/esm/FormGroup';
+// import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { createUserWithEmailAndPassword } from 'firebase/auth'
 
 export function Signup() {
   const [email, setEmail] = useState('')

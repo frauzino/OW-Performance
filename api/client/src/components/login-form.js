@@ -5,9 +5,11 @@ import styles from './login-signup-forms.module.scss'
 import classnames from 'classnames'
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
+// import { FcGoogle } from 'react-icons/fc'
 import { FcGoogle } from 'react-icons/fc'
-import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth'
-import { signInWithEmailAndPassword } from 'firebase/auth'
+// import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth'
+import { GoogleAuthProvider, signInWithPopup, signInWithEmailAndPassword } from 'firebase/auth'
+// import { signInWithEmailAndPassword } from 'firebase/auth'
 import { auth } from '../utils/firebase'
 
 export function Login() {
