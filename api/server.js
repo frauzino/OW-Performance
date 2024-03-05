@@ -89,8 +89,8 @@ app.get('/users/:id/matches', UserControls.getAllMatches)
 
 // Production Middleware - disable for development
 
-app.use(express.static(path.join(__dirname, "/client/build")));
+// app.use(express.static(path.join(__dirname, "/client/build")));
 
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '/client/build', 'index.html'));
-});
+// app.get('*', (req, res) => {
+//   res.sendFile(path.join(__dirname, '/client/build', 'index.html'));
+// });
