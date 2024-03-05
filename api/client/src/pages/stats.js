@@ -1,6 +1,6 @@
 import styles from './stats.module.scss'
 import classnames from 'classnames'
-import { useState, useEffect, useRef, useTransition } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { LineGraph } from '../components/line-graph';
 import { PieChart } from '../components/pie-chart';
 import { BarGraph } from '../components/bar-graph';
@@ -118,7 +118,7 @@ export function Stats() {
   }
 
   const getMaps = async (event, mode) => {
-    if (event && mode != 'All') {
+    if (event && mode !== 'All') {
       fetch(API_OVERFAST + '/maps?gamemode=' + mode)
       .then(res => res.json())
       .then(data => setMaps(data))

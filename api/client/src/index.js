@@ -4,7 +4,7 @@ import './index.css';
 import App from './App';
 // import 'bootstrap/dist/css/bootstrap.min.css';
 import './custom.scss'
-import { createBrowserRouter, createRoutesFromElements, routerProvider, route, Route, RouterProvider } from 'react-router-dom';
+import { createBrowserRouter, createRoutesFromElements, Route, RouterProvider } from 'react-router-dom';
 import { ProtectedRoute } from './non-visual-components/protected-route'
 import { Stats } from './pages/stats'
 import { Login } from './components/login-form'

@@ -17,7 +17,7 @@ export function FilterMatchesForm({
   const [filterSeason, setFilterSeason] = useState(season)
 
   const filterMatches = (event) => {
-    const url = `${userMatchesApi}&${filterHero != 'All' ? 'hero=' + filterHero : ''}&${filterRole != 'All' ? 'role=' + filterRole : ''}&${filterMap != 'All' ? 'map=' + filterMap : ''}&${filterMode != 'All' ? 'gameMode=' + filterMode : ''}&${filterSeason != 'All' ? 'season=' + filterSeason : ''}`
+    const url = `${userMatchesApi}&${filterHero !== 'All' ? 'hero=' + filterHero : ''}&${filterRole !== 'All' ? 'role=' + filterRole : ''}&${filterMap !== 'All' ? 'map=' + filterMap : ''}&${filterMode !== 'All' ? 'gameMode=' + filterMode : ''}&${filterSeason !== 'All' ? 'season=' + filterSeason : ''}`
     fetch(url)
     .then(res => res.json())
     .then(data => {
