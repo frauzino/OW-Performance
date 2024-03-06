@@ -1,1 +1,1 @@
-web: bin/qgtunnel overwise npmstart
+web: bin/qgtunnel overwise npm start
