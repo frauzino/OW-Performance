@@ -4,11 +4,16 @@ const { JSDOM } = jsdom;
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
+const dotenv = require('dotenv');
+dotenv.config()
+
+// const { ProxyAgent } = require('proxy-agent')
+// const quotaGuardUrl = process.env.QUOTAGUARDSTATIC_URL;
+// const proxyAgent = new ProxyAgent(quotaGuardUrl);
+
 const app = express();
 const path = require('path');
-const dotenv = require('dotenv');
 
-dotenv.config()
 
 app.use(express.json());
 app.use(cors());
