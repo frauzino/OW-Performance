@@ -3,7 +3,7 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import styles from './add-match-form.module.scss'
 import classnames from 'classnames'
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 
 const API_OVERFAST = "https://overfast-api.tekrop.fr"
 
@@ -14,6 +14,7 @@ export function AddMatchForm(props) {
   const setNewMatch = props.setNewMatch
   const [heroes, setHeroes] = useState([])
   const [maps, setMaps] = useState([])
+  const addButton = useRef()
 
   useEffect(() => {
     getHeroes();
@@ -42,9 +43,11 @@ export function AddMatchForm(props) {
     heroes.find((hero) => hero.name === heroName).role
   )
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
+    addButton.current.classList.add('disabled')
     e.preventDefault()
-    addMatch()
+    await addMatch()
+    .then(addButton.current.classList.remove('disabled'))
   }
 
   return (
@@ -92,7 +95,7 @@ export function AddMatchForm(props) {
                 </Form.Select>
               </FloatingLabel>
               {/* <Button className={classnames(styles['submit-btn'], 'btn-primary')} onClick={addMatch}>Add Match</Button> */}
-              <Button className={classnames(styles['submit-btn'], 'btn-primary')} type="submit">Add Match</Button>
+              <Button className={classnames(styles['submit-btn'], 'btn-primary')} type="submit" ref={addButton}>Add Match</Button>
             </Form>
           </div>
         </div>
