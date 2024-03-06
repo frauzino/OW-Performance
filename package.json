@@ -1,6 +1,6 @@
 {
   "scripts": {
     "start": "node api/server.js",
-    "heroku-postbuild": "cd api bin/qgtunnel cd api/client && npm install && npm run build"
+    "heroku-postbuild": "cd api/client && npm install && npm run build"
   }
 }
