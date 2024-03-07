@@ -1,1 +1,1 @@
-web: bin/qgtunnel ow-performance npm start
+web: bin/qgtunnel npm start
