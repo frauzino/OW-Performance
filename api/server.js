@@ -7,10 +7,6 @@ const cors = require('cors');
 const dotenv = require('dotenv');
 dotenv.config()
 
-// const { ProxyAgent } = require('proxy-agent')
-// const quotaGuardUrl = process.env.QUOTAGUARDSTATIC_URL;
-// const proxyAgent = new ProxyAgent(quotaGuardUrl);
-
 const app = express();
 const path = require('path');
 
@@ -19,16 +15,13 @@ app.use(express.json());
 app.use(cors());
 
 // Connect to Server
-  // Development
-// app.listen(3001, () => console.log('server started port 3001'));
-
-  // Production
   app.listen(process.env.PORT || 3001, () => console.log('server Started'))
 
 // Connect to DB
 mongoose.connect(process.env.MONGO_URL, {
   useNewUrlParser: true,
-  useUnifiedTopology: true
+  useUnifiedTopology: true,
+  maxPoolSize: 5
 }).then(() => console.log('connected to MongoDB')).catch(console.error);
 
 // Require DB models
@@ -46,12 +39,8 @@ app.get('/matches', async (req, res) => {
 
   // create new match
 app.post('/match/new', async (req, res) => {
-  // const userId = req.body.user
   const newMatch = new Match(req.body);
   const savedMatch = await newMatch.save();
-  // await User.findByIdAndUpdate(userId, {
-  //   $push: {matches: savedMatch._id}
-  // })
   res.json(savedMatch);
 });
 
