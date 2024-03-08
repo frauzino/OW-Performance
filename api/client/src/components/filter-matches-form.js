@@ -21,7 +21,7 @@ export function FilterMatchesForm({
     fetch(url)
     .then(res => res.json())
     .then(data => {
-      data.length != showMatches && setShowMatches(data.length)
+      data.length !== showMatches && setShowMatches(data.length)
       setMatches(data)
     })
     .catch(err => console.error('error', err));

@@ -29,7 +29,7 @@ export function LineGraph(props) {
 
   const winsCount = () => {
     let i = 0
-    matches.map((match, index) => {
+    matches.forEach((match, index) => {
       if (match.outcome === 'Win') {
         winsArray.push(i++)
       } else if (match.outcome === 'Draw') {
