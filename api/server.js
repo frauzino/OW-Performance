@@ -73,12 +73,12 @@ app.get('/getseason', async(req, res) => {
 
   // Users
 
-// const UserControls = require('./controllers/userController.js')
+const UserControls = require('./controllers/userController.js')
 
-// app.post('/users/create', UserControls.create)
-// app.get('/users', UserControls.all)
-// app.get('/users/:id', UserControls.find)
-// app.get('/users/:id/matches', UserControls.getAllMatches)
+app.post('/users/create', UserControls.create)
+app.get('/users', UserControls.all)
+app.get('/users/:id', UserControls.find)
+app.get('/users/:id/matches', UserControls.getAllMatches)
 
 // Production Middleware - disable for development
 
