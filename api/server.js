@@ -15,7 +15,8 @@ app.use(express.json());
 app.use(cors());
 
 // Connect to Server
-  app.listen(process.env.PORT || 3001, () => console.log('server Started'))
+
+app.listen(process.env.PORT || 3001, () => console.log('server Started'))
 
 // Connect to DB
 mongoose.connect(process.env.MONGO_URL, {
@@ -80,9 +81,16 @@ app.get('/users', UserControls.all)
 app.get('/users/:id', UserControls.find)
 app.get('/users/:id/matches', UserControls.getAllMatches)
 
-// Production Middleware - disable for development
+// Production Middleware
+app.use((req, res, next) => {
+  if (req.header('x-forwarded-proto') !== 'https' && process.env.NODE_ENV === 'production') {
+    res.redirect(`https://${req.headers.host}${req.url}`);
+  } else {
+    next();
+  }
+}, express.static(path.join(__dirname, "/client/build")));
 
-app.use(express.static(path.join(__dirname, "/client/build")));
+// app.use(express.static(path.join(__dirname, "/client/build")));
 
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, '/client/build', 'index.html'));
