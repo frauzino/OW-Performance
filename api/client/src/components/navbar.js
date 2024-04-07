@@ -32,7 +32,7 @@ export function Navbar(props) {
               to={item.path}
               className={({ isActive, isPending }) =>
               isPending ? "pending" : isActive ? "active" : ""
-            }
+              }
             >
               {item.body}
             </NavLink>
@@ -42,6 +42,18 @@ export function Navbar(props) {
           <li className={styles['nav-item']} onClick={handleSignOut}>
             <NavLink>
               Logout
+            </NavLink>
+          </li>
+        )}
+        {!token && (
+          <li className={styles['nav-item']}>
+            <NavLink
+              to='login'
+              className={({ isActive, isPending }) =>
+              isPending ? "pending" : isActive ? "active" : ""
+              }
+            >
+              Login
             </NavLink>
           </li>
         )}

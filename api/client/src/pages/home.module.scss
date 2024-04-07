@@ -1,140 +1,86 @@
-.home-container {
+.stats-page-container {
   text-align: center;
-  background-color: var(--bg-dark);
-}
-
-.App-header {
-  height: 15vh;
+  background-color: transparent;
+  padding: 2rem 0rem;
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 3vmin);
-  color: var(--font-light);
-  background-color: var(--overwatch-orange);
-}
-
-.subheader {
-  text-transform: uppercase;
-  color: var(--font-light);
-  margin: 0;
-}
-
-.matches-container {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 1.5rem;
-  padding: 3rem;
-  border-radius: var(--box-border-radius);
-  background-color: var(--dark-blue);
-  box-shadow: var(--card-shadow);
-}
-
-.match-wrapper {
-  width: 50%;
-  display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
-  background: var(--light);
-  padding: 0.75rem .75rem .75rem 3rem;
-  border-radius: var(--box-border-radius)
-}
-
-.match-item {
-  flex: 1;
-  min-width: fit-content;
-}
-
-.border-light-green {
-  border: 2px solid rgb(161, 235, 161);
-}
-
-.border-light-pink {
-  border: 2px solid rgb(242, 160, 172);
-}
-
-.add-popup {
-  position: fixed;
-  bottom: 4rem;
-  right: 7rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  width: 4rem;
-  aspect-ratio: 1/1;
-  border-radius: var(--box-border-radius);
-  font-size: 2rem;
-  font-weight: 900;
-  color: var(--light);
-  background-color: var(--overwatch-orange);
-  transition: .4s;
-
-  &:hover {
-    cursor: pointer;
-    background-color: var(--overwatch-orange);
-  }
-}
-
-.popup {
-  position: absolute;
-  width: 50%;
-  background: var(--light);
-  padding: 2rem 4rem;
-  border-radius: 2rem;
-  transform: translateX(-50%);
-  top: 50%;
-  left: 50%;
-  z-index: 1;
-  box-shadow: var(--shadow);
-}
-
-.close-popup {
-  position: absolute;
-  right: 1rem;
-  top: 1rem;
-}
-
-.popup-content {
-  display: flex;
-  flex-direction: column;
   gap: 2rem;
 }
 
-.input-container {
+.card {
   display: flex;
-  width: 100%;
-  justify-content: space-around;
-  gap: 1rem;
+  flex-direction: column;
+  padding: 2rem;
+  border: 1px solid #ffffff22;
+  background-color: #282c34;
+  background: linear-gradient(0deg, rgba(40, 44, 52, .5) 50%, rgba(17, 0, 32, .5) 100%);
+  box-shadow: 0 7px 20px 5px #00000088;
+  border-radius: .7rem;
+  backdrop-filter: blur(7px);
+  -webkit-backdrop-filter: blur(7px);
+  max-width: calc(50% - 1rem);
 }
 
-.input {
-  appearance: none;
-  outline: none;
-  border: 1px solid var(--light-grey);
+.header-wrapper {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+   > .card-header {
+    margin-bottom: 0;
+   }
+   > .filter-select {
+    width: fit-content;
+   }
+}
+
+.card-header {
+  color: var(--font-light);
+  margin-bottom: 1.5rem;
+  text-align: left;
+}
+
+.stats-card {
+  min-height: 5rem;
+  max-height: fit-content;
+}
+
+.stats {
+  overflow: auto;
   background-color: var(--light);
-  border-radius: .5rem;
-  padding: .75rem 1rem;
-  font-size: 1rem;
-  flex: 1;
-  width: 100%;
+  border-radius: var(--bs-border-radius);
+  position: relative;
 }
 
-.submit-btn {
-  width: fit-content;
-  min-width: 5rem;
-  padding: .5rem 1.5rem;
-  background-color: var(--overwatch-orange);
-  transition: .4s;
-  align-self: center;
-  border-radius: .5rem;
-  font-weight: 700;
-  color: var(--light);
-  border: none;
+.match-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  position: relative;
+}
 
-  &:hover {
-    cursor: pointer;
-    background-color: var(--overwatch-orange-dark);
+.match-delete {
+  position: absolute;
+  top: 6px;
+  right: .125rem;
+}
+
+.bg-light-green {
+  background-color: rgba(161, 235, 161, .5);
+}
+
+.bg-light-pink {
+  background-color: rgba(242, 160, 172, .5);
+}
+
+.match-item {
+  border: var(--bs-border-width) solid var(--bs-border-color);
+  text-align: center;
+  position: relative;
+  padding: 2px;
+}
+
+@media screen and (max-width: 749px) {
+  .stats-page-container {
+    flex-direction: column;
   }
 }
