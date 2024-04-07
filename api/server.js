@@ -18,7 +18,17 @@ app.use(cors());
 
 app.listen(process.env.PORT || 3001, () => console.log('server Started'))
 
+console.log('mongoUrl:', process.env.MONGO_URL)
+
+const mongoUrl = "mongodb+srv://richarddfyoung:RrxI7xOqjc2QnAHO@overwise.b12itby.mongodb.net/overwise?retryWrites=true&w=majority&appName=overwise"
+
 // Connect to DB
+mongoose.connect(mongoUrl, { //local
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+  maxPoolSize: 5
+}).then(() => console.log('connected to MongoDB')).catch(console.error);
+
 mongoose.connect(process.env.MONGO_URL, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
@@ -64,7 +74,6 @@ app.get('/getseason', async(req, res) => {
   const title = document.querySelector('title')?.textContent
   const seasonSubstring = title.match(/Season \d/)[0]
   const season = parseInt(seasonSubstring.slice(-1))
-  console.log(season)
   res.status(200).json(season)
 })
 

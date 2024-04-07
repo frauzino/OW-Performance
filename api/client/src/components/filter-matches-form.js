@@ -6,7 +6,7 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 
 export function FilterMatchesForm({
-  header, season, seasons, roles, heroes, gameModes, maps, getMaps, getSeasonMatches, setMatches, userMatchesApi, showMatches, setShowMatches
+  user, matches, header, season, seasons, roles, heroes, gameModes, maps, getMaps, getSeasonMatches, setMatches, userMatchesApi, showMatches, setShowMatches, localStoredMatches, updateFilteredMatches
 }) {
 
   const [filteredHeroes, setFilteredHeroes] = useState(heroes)
@@ -15,6 +15,13 @@ export function FilterMatchesForm({
   const [filterMode, setFilterMode] = useState('All')
   const [filterRole, setFilterRole] = useState('All')
   const [filterSeason, setFilterSeason] = useState(season)
+  const [appliedFilters, setAppliedFilters] = useState({})
+
+  useEffect(() => {
+    if (Object.keys(appliedFilters).length > 0) {
+      applyLocalFilters(appliedFilters, false)
+    }
+  }, [localStoredMatches])
 
   const filterMatches = (event) => {
     const url = `${userMatchesApi}&${filterHero !== 'All' ? 'hero=' + filterHero : ''}&${filterRole !== 'All' ? 'role=' + filterRole : ''}&${filterMap !== 'All' ? 'map=' + filterMap : ''}&${filterMode !== 'All' ? 'gameMode=' + filterMode : ''}&${filterSeason !== 'All' ? 'season=' + filterSeason : ''}`
@@ -28,12 +35,36 @@ export function FilterMatchesForm({
     event.preventDefault();
   }
 
+  const applyLocalFilters = (filters, updateAppliedFilters = true) => {
+    if (updateAppliedFilters) {
+      setAppliedFilters(filters);
+    }
+    const effectiveFilters = {
+      hero: filters.filterHero === 'All' ? '' : filters.filterHero,
+      map: filters.filterMap === 'All' ? '' : filters.filterMap,
+      mode: filters.filterMode === 'All' ? '' : filters.filterMode,
+      role: filters.filterRole === 'All' ? '' : filters.filterRole,
+      season: filters.filterSeason === 'All' ? '' : filters.filterSeason,
+    }
+    const filteredMatches = localStoredMatches.filter(match => {
+      return Object.keys(effectiveFilters).every(key => {
+        return effectiveFilters[key] === '' || match[key] === effectiveFilters[key]
+      });
+    });
+    setMatches(filteredMatches)
+  }
+
   const resetFilters = () => {
-    setFilterHero('All')
-    setFilterMap('All')
-    setFilterMode('All')
-    setFilterRole('All')
-    setFilterSeason(season)
+    if (user) {
+      setFilterHero('All')
+      setFilterMap('All')
+      setFilterMode('All')
+      setFilterRole('All')
+      setFilterSeason(season)
+    } else {
+      setAppliedFilters({});
+      setMatches(localStoredMatches);
+    }
   }
 
   useEffect(()=> {
@@ -62,7 +93,10 @@ export function FilterMatchesForm({
             <Form.Select
               className={styles['filter-select']}
               aria-label="Role"
-              onChange={e => [setFilterRole(e.target.value), setFilteredHeroes(e.target.value === 'All' ? heroes : heroes.filter((hero) => hero.role === e.target.value))]}
+              onChange={e => {
+                setFilterRole(e.target.value);
+                setFilteredHeroes(e.target.value === 'All' ? heroes : heroes.filter((hero) => hero.role === e.target.value));
+              }}
               value={filterRole}
             >
               <option value="All">All</option>
@@ -114,8 +148,12 @@ export function FilterMatchesForm({
 
             </Form.Select>
           </FloatingLabel>
-          <Button className={styles['submit-btn']} onClick={e => filterMatches(e)}>Go</Button>
-          <Button className={classnames(styles['submit-btn'], 'btn-secondary')} onClick={e => ([getSeasonMatches(e), resetFilters(), setShowMatches(10)])}>Reset</Button>
+          <Button className={styles['submit-btn']} onClick={(e) => user ? filterMatches(e) : applyLocalFilters({filterHero, filterMap, filterMode, filterRole, filterSeason})}>Go</Button>
+          <Button className={classnames(styles['submit-btn'], 'btn-secondary')} onClick={e => {
+            getSeasonMatches(e);
+            resetFilters();
+            setShowMatches(10)
+          }}>Reset</Button>
         </Form>
     </div>
   )

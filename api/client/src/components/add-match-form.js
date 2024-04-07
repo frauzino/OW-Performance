@@ -45,9 +45,8 @@ export function AddMatchForm(props) {
 
   const handleSubmit = async (e) => {
     addButton.current.classList.add('disabled')
-    console.log(addButton.current.classList)
     e.preventDefault()
-    await addMatch()
+    await addMatch(newMatch)
     .then(addButton.current.classList.remove('disabled'))
   }
 
