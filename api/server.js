@@ -72,8 +72,10 @@ app.get('/getseason', async(req, res) => {
   const document = dom.window.document
 
   const title = document.querySelector('title')?.textContent
-  const seasonSubstring = title.match(/Season \d/)[0]
-  const season = parseInt(seasonSubstring.slice(-1))
+  const seasonSubstring = title.match(/Season \d+/)[0]
+  console.log('seasonSubstring', seasonSubstring)
+  const season = parseInt(seasonSubstring.replace('Season', ''))
+  console.log('season', season)
   res.status(200).json(season)
 })
 
