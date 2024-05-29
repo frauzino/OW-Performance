@@ -1,0 +1,46 @@
+.banner {
+    background: linear-gradient(#bedaf0 40%, transparent);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5rem;
+    margin-top: 3rem;
+    transform: translate(-5rem, -8rem);
+    width: 100vw;
+    height: 75vh;
+}
+
+.text-block {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 1.5rem;
+    max-width: 35%;
+
+    h1 {
+      font-weight: bold;
+      font-size: 3.5rem;
+    }
+
+    p {
+      font-size: 1.5rem;
+      line-height: normal;
+    }
+
+    .emphasis {
+      color: var(--overwatch-orange);
+    }
+}
+
+.buttons {
+  display: flex;
+  gap: 1rem;
+}
+
+.image-block {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 1;
+}

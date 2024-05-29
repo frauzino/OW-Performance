@@ -1,4 +1,4 @@
-import styles from './home.module.scss'
+import styles from './stats.module.scss'
 import classnames from 'classnames'
 import { useState, useEffect, useRef } from 'react'
 import { LineGraph } from '../components/line-graph';
@@ -13,7 +13,8 @@ import { Popup } from '../components/popup';
 const API_BASE = process.env.REACT_APP_BASE_API_URL
 const API_OVERFAST = "https://overfast-api.tekrop.fr"
 
-export function Home() {
+// export function Home() {
+export function Stats() {
   const user = JSON.parse(localStorage.getItem('user'))
 
   const userMatchesApi = user ? `${API_BASE}/matches?user=${user.uid}` : ''
@@ -38,14 +39,14 @@ export function Home() {
       const pulledMatches = JSON.parse(localStorage.getItem('matches')) || []
       setLocalStoredMatches(pulledMatches)
       setMatches(pulledMatches)
-    }
 
-    const timer = setTimeout(() => { // shows popup after 1 hr
-      setShowPopup(true)
-    }, 3600000);
+      setTimeout(() => { // shows popup after 1 hr
+        setShowPopup(true)
+      }, 3600000);
 
-    return () => {
-      clearTimeout();
+      return () => {
+        clearTimeout();
+      }
     }
   }, [])
 
