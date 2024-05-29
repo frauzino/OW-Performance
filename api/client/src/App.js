@@ -13,10 +13,10 @@ export default function App() {
     <div className={styles['App']}>
         <Navbar
           navItems={[
-            // {
-            //   body: 'Stats',
-            //   path: '/stats'
-            // }
+            {
+              body: 'My Stats',
+              path: 'stats'
+            }
           ]}
         />
         <div className={styles['master-container']}>
