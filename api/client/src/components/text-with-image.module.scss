@@ -1,0 +1,32 @@
+.text-with-image {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 2rem;
+}
+
+.reverse {
+  flex-direction: row-reverse;
+}
+
+.text-block {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 1.5rem;
+  max-width: 40%;
+
+  h1 {
+    font-weight: bold;
+    font-size: 3.5rem;
+    // color: var(--overwatch-orange);
+    color: var(--font-light);
+  }
+
+  p {
+    font-size: 1.5rem;
+    line-height: normal;
+    color: var(--font-light);
+  }
+}

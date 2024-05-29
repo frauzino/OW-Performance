@@ -1,4 +1,29 @@
-$primary: #3cb3fd;
-$secondary: #ea6c29;
+// $primary: #3cb3fd;
+$primary: #049dfb;
+// $secondary: #ea6c29;
+$secondary: #e9590b;
+$headings-color: var(--font-dark);
+// $btn-text-color: rgb(20, 20, 20);
+$btn-text-color: var(--font-light);
 
 @import "../node_modules/bootstrap/scss/bootstrap";
+
+.btn {
+  color: $btn-text-color !important;
+  padding: 1rem;
+  font-weight: 700;
+  min-width: 4rem;
+  transition: all .2s;
+
+  &:active {
+    transform: scale(.95);
+  }
+}
+
+.btn-primary {
+  background-color: $primary;
+}
+
+.btn-secondary {
+  background-color: $secondary;
+}
