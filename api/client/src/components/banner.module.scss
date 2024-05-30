@@ -44,3 +44,9 @@
     align-items: center;
     flex: 1;
 }
+
+.banner-image {
+    width: 50%;
+    height: 100%;
+    object-fit: cover;
+}

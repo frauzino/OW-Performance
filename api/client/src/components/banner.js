@@ -16,7 +16,7 @@ export function Banner({title, tagline, image, imageAlt, buttonOneText, buttonOn
             </div>
           </div>
           <div className={styles['image-block']}>
-            <img src={image} alt={imageAlt} />
+            <img src={image} alt={imageAlt} className={styles['banner-image']}/>
           </div>
         </div>
     );
