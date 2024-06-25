@@ -4,10 +4,10 @@
     justify-content: space-between;
     align-items: center;
     padding: 5rem;
-    margin-top: 3rem;
+    margin-top: 5rem;
     transform: translate(-5rem, -8rem);
     width: 100vw;
-    height: 75vh;
+    height: 70vh;
 }
 
 .text-block {
@@ -49,4 +49,35 @@
     width: 50%;
     height: 100%;
     object-fit: cover;
+}
+
+@media screen and (max-width: 749px) {
+  .banner {
+    flex-direction: column;
+    gap: 2rem;
+    transform: translate(-1rem, -4rem);
+    height: 100vh;
+    padding: 3rem 1rem;
+    overflow: hidden;
+  }
+
+  .text-block {
+    max-width: 100%;
+    gap: .5rem;
+
+    h1 {
+      font-size: 2.5rem;
+    }
+
+    p {
+      font-size: 1.25rem;
+    }
+  }
+
+  .banner-image {
+    width: 90%;
+    mask: linear-gradient(to bottom,
+    rgba(0,0,0, 1) 0,   rgba(0,0,0, 1) 60%,
+    transparent 80%)
+  }
 }
