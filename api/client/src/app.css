@@ -80,6 +80,7 @@ code {
 @media screen and (max-width: 749px) {
   .gloss-card {
     padding: 1rem;
+    width: 100%;
   }
 
   .chart-card {

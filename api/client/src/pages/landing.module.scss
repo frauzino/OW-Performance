@@ -6,3 +6,11 @@
   gap: 5rem;
   padding: 0 5rem;
 }
+
+@media screen and (max-width: 749px) {
+  .content-container {
+    gap: 3rem;
+    padding: 0;
+  }
+
+}

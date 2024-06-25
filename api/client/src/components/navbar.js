@@ -20,11 +20,10 @@ export function Navbar(props) {
 
   return (
     <div className={styles['navbar']}>
-      <div className={styles['logo-container']}>
-        <Link to="/" style={{textDecoration: "none"}}>
-          <h2 className={styles['title']}>OverWise</h2>
-        </Link>
-      </div>
+      <Link to="/" style={{textDecoration: "none"}} className={styles['logo-container']}>
+        <img src="/logo.png" alt="OverWise Logo" width={50} height={50} />
+        <h2 className={styles['title']}>OverWise</h2>
+      </Link>
       <ul className={styles['nav-items-container']}>
         {navItems.map((item, index) => (
           <li key={`navlink-${index}`} className={styles['nav-item']}>

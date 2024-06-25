@@ -33,12 +33,18 @@ export function BarGraph(props) {
     matches.filter(match => item === (match[subject])).length
   )
 
+  const outcomeColors = {
+    'Loss': 'rgba(242, 160, 172, .8)',
+    'Win': 'rgba(161, 235, 161, .8)',
+    'Draw': 'rgba(211, 211, 211, .8)'
+  };
+
   const data = {
     labels: subjects(),
     datasets: [
       {
         data: subjects().map(subjectCount),
-        backgroundColor: (subject === 'outcome') ? ['rgba(161, 235, 161, .8)', 'rgba(242, 160, 172, .8)', 'rgba(211, 211, 211, .8)'] :Please.make_color({
+        backgroundColor: subjects().map(subject => outcomeColors[subject]) || Please.make_color({
           colors_returned: subjects().map(subjectCount).length,
           value: .8
         })

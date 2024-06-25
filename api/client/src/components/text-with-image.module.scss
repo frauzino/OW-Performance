@@ -30,3 +30,26 @@
     color: var(--font-light);
   }
 }
+
+@media screen and (max-width: 749px) {
+  .text-with-image {
+    flex-direction: column;
+    width: 100%;
+    gap: 2rem;
+  }
+
+  .text-block {
+    max-width: 100%;
+    gap: .5rem;
+
+    h1 {
+      font-size: 2rem;
+    }
+
+    p {
+      font-size: 1.25rem;
+    }
+  }
+
+
+}
