@@ -1,3 +1,4 @@
+import React from 'react';
 import styles from './popup.module.scss'
 import CloseButton from 'react-bootstrap/esm/CloseButton';
 import Button from 'react-bootstrap/esm/Button';
