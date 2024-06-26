@@ -65,6 +65,18 @@
   right: .125rem;
 }
 
+.no-data {
+  color: var(--font-light);
+  font-size: 1.5rem;
+  background-color: transparent;
+  align-content: center;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
 .bg-light-green {
   background-color: rgba(161, 235, 161, .5);
 }

@@ -239,6 +239,7 @@ export function Stats() {
         <h4 className={styles['card-header']}>
           {matches.length} Matches. Win Rate: {((countMatches(matches, (match) => match.outcome === 'Win') / matches.length) * 100).toFixed(1)}%
         </h4>
+        {matches.length === 0 && <p className={styles['no-data']}>No Data</p>}
         <div className={styles['stats']}>
           <div className={styles['fader']} />
           {matches?.toReversed().map((match, index) => (
@@ -270,6 +271,7 @@ export function Stats() {
             <option value={10}>10</option>
           </Form.Select>
         </div>
+        {matches.length === 0 && <p className={styles['no-data']}>No Data</p>}
         <div>
           <LineGraph
             matches={matches.slice(0).slice(-showMatches)}
@@ -282,6 +284,7 @@ export function Stats() {
         <h4 className={styles['card-header']}>
         Hero Picks
         </h4>
+        {matches.length === 0 && <p className={styles['no-data']}>No Data</p>}
         <div className={styles['chart-container']}>
           <PieChart
             matches={matches}
@@ -294,6 +297,7 @@ export function Stats() {
         <h4 className={styles['card-header']}>
           Total Match Outcomes
         </h4>
+        {matches.length === 0 && <p className={styles['no-data']}>No Data</p>}
         <div className={styles['chart-container']}>
           <BarGraph
             matches={matches}
@@ -307,6 +311,7 @@ export function Stats() {
         <h4 className={styles['card-header']}>
           Maps Played
         </h4>
+        {matches.length === 0 && <p className={styles['no-data']}>No Data</p>}
         <div className={styles['chart-container']}>
           <BarGraph
             matches={matches}
@@ -320,6 +325,7 @@ export function Stats() {
         <h4 className={styles['card-header']}>
           Gamemodes Played
         </h4>
+        {matches.length === 0 && <p className={styles['no-data']}>No Data</p>}
         <div className={styles['chart-container']}>
           <PieChart
             matches={matches}
