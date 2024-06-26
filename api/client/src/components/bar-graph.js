@@ -39,15 +39,19 @@ export function BarGraph(props) {
     'Draw': 'rgba(211, 211, 211, .8)'
   };
 
+  // backgroundColor is an array of colors for each subject, if the subject is not a key in outcomeColors, it will generate
+  // a random color for that subject using the Please.js library. Please.make_color() returns an array of colors
+  // because we are already mapping over the subjects, we need to access the first element of the array returned by
+  // Please.make_color() to get the color for that subject, hence the [0] at the end of the line
   const data = {
     labels: subjects(),
     datasets: [
       {
         data: subjects().map(subjectCount),
-        backgroundColor: subjects().map(subject => outcomeColors[subject]) || Please.make_color({
+        backgroundColor: subjects().map(subject => outcomeColors[subject] || Please.make_color({
           colors_returned: subjects().map(subjectCount).length,
           value: .8
-        })
+        })[0])
       }
     ]
   }
