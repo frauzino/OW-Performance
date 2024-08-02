@@ -70,15 +70,23 @@
 
 @media screen and (max-width: 749px) {
   .navbar, .nav-items-container {
-    padding: 0;
     width: 100vw;
+  }
+
+  .navbar {
+    padding: 0 2rem;
+    gap: 1rem;
+  }
+
+  .nav-items-container {
+    padding: 0;
+  }
+
+  .title {
+    display: none;
   }
 
   .nav-items-container {
     justify-content: flex-end;
-  }
-
-  .title, .nav-item {
-    padding: 0 1rem;
   }
 }

@@ -148,12 +148,14 @@ export function FilterMatchesForm({
 
             </Form.Select>
           </FloatingLabel>
-          <Button className={styles['submit-btn']} onClick={(e) => user ? filterMatches(e) : applyLocalFilters({filterHero, filterMap, filterMode, filterRole, filterSeason})}>Go</Button>
-          <Button className={classnames(styles['submit-btn'], 'btn-secondary')} onClick={e => {
-            getSeasonMatches(e);
-            resetFilters();
-            setShowMatches(10)
-          }}>Reset</Button>
+          <div className={styles['buttons-container']}>
+            <Button className={styles['submit-btn']} onClick={(e) => user ? filterMatches(e) : applyLocalFilters({filterHero, filterMap, filterMode, filterRole, filterSeason})}>Go</Button>
+            <Button className={classnames(styles['submit-btn'], 'btn-secondary')} onClick={e => {
+              getSeasonMatches(e);
+              resetFilters();
+              setShowMatches(10)
+            }}>Reset</Button>
+          </div>
         </Form>
     </div>
   )
