@@ -21,6 +21,11 @@
   }
 }
 
+.buttons-container {
+  display: flex;
+  gap: 1rem;
+}
+
 button {
   height: calc(3.5rem + calc(var(--bs-border-width) * 2));
 }
