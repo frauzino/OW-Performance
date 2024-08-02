@@ -36,14 +36,17 @@ button {
     flex-wrap: wrap;
 
     > div {
-      // flex: auto;
-      flex: 1 0 40%;
-      max-width: fit-content
+      flex: 1 0 45%;
     }
 
-    > button {
-      font-size: 14px;
-      flex: 1 auto 45%;
+    .buttons-container {
+      flex: 1 0 100%;
+      display: flex;
+      gap: .5rem;
+
+      > button {
+        flex: 1 0 45%;
+      }
     }
   }
 }

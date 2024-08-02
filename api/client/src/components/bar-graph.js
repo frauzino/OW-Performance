@@ -80,10 +80,10 @@ export function BarGraph(props) {
   }
 
   return(
-      <Bar
-        className={styles['bar-graph']}
-        options={options}
-        data={data}
-      />
+    <Bar
+      className={styles['bar-graph']}
+      options={options}
+      data={data}
+    />
   )
 }
