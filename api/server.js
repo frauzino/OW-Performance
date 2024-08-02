@@ -7,7 +7,18 @@ const cors = require('cors');
 const dotenv = require('dotenv');
 dotenv.config()
 
+// Middleware
 const app = express();
+
+app.use((req, res, next) => {
+  if (req.headers.host.slice(0, 4) === 'www.') {
+    var newHost = req.headers.host.slice(4);
+    return res.redirect(301, req.protocol + '://' + newHost + req.originalUrl);
+  } else {
+    next();
+  }
+});
+
 const path = require('path');
 
 
